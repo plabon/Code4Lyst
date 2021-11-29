@@ -18,7 +18,6 @@ class DogRepositoryImp @Inject constructor(private val remoteDataSource: DogData
 
     override suspend fun getAllDogBreeds(): Flow<ResponseWrapper<List<Breed>>> {
         return flow {
-            Log.e(TAG, "I'm working in thread ${Thread.currentThread().name}")
             emit(remoteDataSource.getAllBreeds())
         }
     }
@@ -28,7 +27,6 @@ class DogRepositoryImp @Inject constructor(private val remoteDataSource: DogData
         limit: Int
     ): Flow<ResponseWrapper<List<Image>>> {
         return flow {
-            Log.e(TAG, "I'm working in thread ${Thread.currentThread().name}")
             emit(remoteDataSource.getImagesByBreed(breedId,limit))
         }
     }

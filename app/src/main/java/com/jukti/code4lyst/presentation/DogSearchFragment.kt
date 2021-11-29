@@ -58,8 +58,6 @@ class DogSearchFragment : Fragment() {
         }
         binding.breedSpinner.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id->
-                // do something with the available information
-                Log.e(TAG,"Position: $position")
                 val selectedBreed = breedAdapter.collection[position]
                 binding.breed = selectedBreed
                 dogSearchViewModel.setSelectedBreedId(selectedBreed.id)
@@ -105,13 +103,11 @@ class DogSearchFragment : Fragment() {
     }
 
     private fun handleSuccessResponseImage(imageList: List<ImageDomainModel>) {
-        imageList.map { it.url?.let { it1 -> Log.e(TAG, it1) } }
         imageAdapter.collection = imageList.toMutableList()
         binding.viewPager2.setCurrentItem(0,true)
     }
 
     private fun handleError(rawResponse: String) {
-        Log.e(TAG,"handleError")
         activity?.let {
             Snackbar.make(it.findViewById(android.R.id.content), rawResponse, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -123,7 +119,6 @@ class DogSearchFragment : Fragment() {
     }
 
     private fun showToast(message: String) {
-        Log.e(TAG,"showToast")
         activity?.let {
             Snackbar.make(it.findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -131,7 +126,6 @@ class DogSearchFragment : Fragment() {
     }
 
     private fun handleLoading(loading: Boolean) {
-        Log.e(TAG,"handleLoading")
         if(loading) {
             binding.progressBar.visibility = View.VISIBLE
         }
